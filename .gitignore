@@ -1,0 +1,10 @@
+PFY2201_Exp1_S1_Ejemplo_Estructura_basica_HTML.html
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales
+*.tmp
+*.log

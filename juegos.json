@@ -1,0 +1,17 @@
+[
+  {
+    "titulo": "Hollow Knight",
+    "genero": "Metroidvania",
+    "descripcion": "Explora un reino subterráneo lleno de criaturas, secretos y desafiantes combates."
+  },
+  {
+    "titulo": "Stardew Valley",
+    "genero": "Simulación",
+    "descripcion": "Cultiva tu granja, conoce a la comunidad y construye una nueva vida a tu propio ritmo."
+  },
+  {
+    "titulo": "Hades",
+    "genero": "Roguelike de acción",
+    "descripcion": "Combate para escapar del inframundo mientras descubres una historia inspirada en la mitología griega."
+  }
+]

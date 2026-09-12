@@ -111,6 +111,22 @@ section {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.producto .card.card-destacada {
+    outline: 3px solid rgba(8, 145, 178, 0.45);
+    outline-offset: 2px;
+}
+
+.card-juego-adicional {
+    border: 1px solid #67e8f9;
+    border-top: 4px solid #0891b2;
+    background-color: #f8fafc;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+.card-juego-adicional .card-body {
+    padding: 20px;
+}
+
 .producto:nth-child(even) .card {
     border-color: #67e8f9;
     background-color: #ecfeff;

@@ -47,6 +47,8 @@ p {
 }
 
 .navbar-nav {
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 8px;
     text-align: center;
 }
@@ -67,7 +69,8 @@ p {
 }
 
 .navbar .nav-link:hover,
-.navbar .nav-link:focus {
+.navbar .nav-link:focus,
+.navbar .btn-categoria[aria-pressed="true"] {
     background-color: #22d3ee;
     color: #0f172a;
 }
@@ -108,23 +111,13 @@ section {
 .producto .card {
     border: 1px solid #94a3b8;
     background-color: #f8fafc;
+    scroll-margin-top: 16px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.producto .card.card-destacada {
-    outline: 3px solid rgba(8, 145, 178, 0.45);
-    outline-offset: 2px;
-}
-
-.card-juego-adicional {
-    border: 1px solid #67e8f9;
-    border-top: 4px solid #0891b2;
-    background-color: #f8fafc;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
-}
-
-.card-juego-adicional .card-body {
-    padding: 20px;
+.producto .card:target {
+    outline: 4px solid #0891b2;
+    outline-offset: 3px;
 }
 
 .producto:nth-child(even) .card {
@@ -224,4 +217,39 @@ footer p {
         width: 100%;
         margin-bottom: 0;
     }
+}
+
+/* Los botones de categoría mantienen el aspecto de la navegación y el foco visible. */
+.navbar .btn-categoria {
+    width: 100%;
+    background-color: transparent;
+}
+
+.navbar .nav-link:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 3px;
+}
+
+/* Mantiene el resumen legible en móvil y el foco de sus acciones visible. */
+#contenido-carrito .list-group-item > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.btn-agregar-carrito:focus-visible,
+.btn-eliminar-carrito:focus-visible {
+    outline: 3px solid #164e63;
+    outline-offset: 3px;
+}
+
+/* Subrayado y peso complementan el color de la categoría seleccionada. */
+.navbar .btn-categoria[aria-pressed="true"] {
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+#formulario-busqueda :focus-visible {
+    outline: 3px solid #164e63;
+    outline-offset: 3px;
 }

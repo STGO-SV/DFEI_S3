@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stick Drift | Tienda de videojuegos</title>
-    <link rel="icon" type="image/png" href="imagenes/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="assets/css/estilos.css">
 </head>
 <body>
     <header>
@@ -19,10 +19,11 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-center" id="navegacionPrincipal">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav" id="opciones-navegacion">
                         <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#carrito">Carrito</a></li>
+                        <li class="nav-item" id="opcion-contacto"><a class="nav-link" href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
             </div>
@@ -46,13 +47,19 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="imagenes/minecraft.webp" class="d-block w-100 carousel-imagen" alt="Portada del videojuego Minecraft">
+                        <a href="#producto-minecraft" aria-label="Ver Minecraft en el catálogo">
+                            <img src="assets/img/minecraft.webp" class="d-block w-100 carousel-imagen" alt="Portada del videojuego Minecraft">
+                        </a>
                     </div>
                     <div class="carousel-item">
-                        <img src="imagenes/zelda-breath-of-the-wild.webp" class="d-block w-100 carousel-imagen" alt="Portada del videojuego The Legend of Zelda: Breath of the Wild">
+                        <a href="#producto-zelda-breath-of-the-wild" aria-label="Ver The Legend of Zelda: Breath of the Wild en el catálogo">
+                            <img src="assets/img/zelda-breath-of-the-wild.webp" class="d-block w-100 carousel-imagen" alt="Portada del videojuego The Legend of Zelda: Breath of the Wild">
+                        </a>
                     </div>
                     <div class="carousel-item">
-                        <img src="imagenes/god-of-war-ragnarok.jpg" class="d-block w-100 carousel-imagen" alt="Portada del videojuego God of War Ragnarök">
+                        <a href="#producto-god-of-war-ragnarok" aria-label="Ver God of War Ragnarök en el catálogo">
+                            <img src="assets/img/god-of-war-ragnarok.jpg" class="d-block w-100 carousel-imagen" alt="Portada del videojuego God of War Ragnarök">
+                        </a>
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselVideojuegos" data-bs-slide="prev">
@@ -66,76 +73,30 @@
             </div>
         </section>
 
-        <!-- Productos -->
-        <section id="productos">
-            <h2>Productos destacados</h2>
-            <p>Estos títulos destacan por sus mundos, historias y desafíos.</p>
-            <div class="container-fluid">
-                <ul class="row g-4 mt-3 mb-0 list-unstyled">
-                    <li class="col-12 col-md-6 col-lg-4 producto">
-                        <article class="card h-100">
-                            <img src="imagenes/minecraft.webp" class="card-img-top" alt="Portada del videojuego Minecraft">
-                            <div class="card-body">
-                                <h3 class="card-title">Minecraft</h3>
-                                <p class="card-text mb-0">Explora mundos abiertos, reúne recursos y construye todo lo que puedas imaginar.</p>
-                                <p id="detalles-minecraft" class="detalle-juego mt-3 mb-3 d-none">Construye, explora y sobrevive en mundos generados de forma única, tanto en solitario como con otros jugadores.</p>
-                                <button class="btn btn-outline-info btn-detalles" type="button" aria-expanded="false" aria-controls="detalles-minecraft">Ver más</button>
-                            </div>
-                        </article>
-                    </li>
-                    <li class="col-12 col-md-6 col-lg-4 producto">
-                        <article class="card h-100">
-                            <img src="imagenes/zelda-breath-of-the-wild.webp" class="card-img-top" alt="Portada del videojuego The Legend of Zelda: Breath of the Wild">
-                            <div class="card-body">
-                                <h3 class="card-title">The Legend of Zelda: Breath of the Wild</h3>
-                                <p class="card-text mb-0">Recorre el reino de Hyrule y descubre sus secretos en una aventura de mundo abierto.</p>
-                                <p id="detalles-zelda" class="detalle-juego mt-3 mb-3 d-none">Resuelve santuarios, domina nuevas habilidades y elige tu propia ruta para salvar el reino de Hyrule.</p>
-                                <button class="btn btn-outline-info btn-detalles" type="button" aria-expanded="false" aria-controls="detalles-zelda">Ver más</button>
-                            </div>
-                        </article>
-                    </li>
-                    <li class="col-12 col-md-6 col-lg-4 producto">
-                        <article class="card h-100">
-                            <img src="imagenes/god-of-war-ragnarok.jpg" class="card-img-top" alt="Portada del videojuego God of War Ragnarök">
-                            <div class="card-body">
-                                <h3 class="card-title">God of War Ragnarök</h3>
-                                <p class="card-text mb-0">Acompaña a Kratos y Atreus en un viaje épico inspirado en la mitología nórdica.</p>
-                                <p id="detalles-god-of-war" class="detalle-juego mt-3 mb-3 d-none">Enfrenta criaturas y dioses nórdicos mientras Kratos y Atreus se preparan para la llegada del Ragnarök.</p>
-                                <button class="btn btn-outline-info btn-detalles" type="button" aria-expanded="false" aria-controls="detalles-god-of-war">Ver más</button>
-                            </div>
-                        </article>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Juegos cargados desde JSON -->
-        <section id="juegos-adicionales" aria-labelledby="tituloJuegosAdicionales">
-            <h2 id="tituloJuegosAdicionales">Más juegos para explorar</h2>
-            <p>Descubre otras aventuras seleccionadas para la comunidad de Stick Drift.</p>
-            <div id="contenedor-juegos" class="row g-3 mt-1" aria-live="polite"></div>
-        </section>
-
-        <!-- Formulario de recomendación -->
-        <section id="recomendaciones" aria-labelledby="tituloRecomendaciones">
-            <h2 id="tituloRecomendaciones">Recomiéndanos un juego</h2>
-            <p>Cuéntanos qué videojuego debería formar parte de nuestra próxima selección.</p>
-            <form id="formulario-recomendacion" class="mt-4" novalidate>
-                <div class="mb-3">
-                    <label for="nombre-juego" class="form-label">Nombre del juego</label>
-                    <input type="text" class="form-control" id="nombre-juego" name="nombreJuego" required>
+        <!-- Catálogo principal cargado desde juegos.json -->
+        <section id="productos" aria-labelledby="tituloProductos">
+            <h2 id="tituloProductos">Catálogo de videojuegos</h2>
+            <p>Descubre tu próxima aventura.</p>
+            <form id="formulario-busqueda" class="mt-4" role="search">
+                <label for="busqueda" class="form-label">Buscar productos</label>
+                <div class="d-flex flex-column flex-sm-row gap-2">
+                    <input type="text" class="form-control" id="busqueda" name="busqueda" aria-describedby="ayuda-busqueda">
+                    <button type="submit" class="btn btn-info">Buscar</button>
+                    <button type="button" class="btn btn-outline-secondary" id="limpiar-busqueda">Limpiar búsqueda</button>
                 </div>
-                <div class="mb-3">
-                    <label for="nombre-usuario" class="form-label">Nombre del usuario</label>
-                    <input type="text" class="form-control" id="nombre-usuario" name="nombreUsuario" required>
-                </div>
-                <div class="mb-3">
-                    <label for="comentario-recomendacion" class="form-label">Comentario o motivo de la recomendación</label>
-                    <textarea class="form-control" id="comentario-recomendacion" name="comentario" rows="4" minlength="10" required></textarea>
-                    <div class="form-text">Escribe al menos 10 caracteres.</div>
-                </div>
-                <button type="submit" class="btn btn-info">Enviar recomendación</button>
+                <p id="ayuda-busqueda" class="form-text">Busca por nombre, descripción o categoría. Para ver todo, selecciona Todos y busca con el campo vacío.</p>
             </form>
+            <p id="mensaje-carrito" class="text-success mt-3 mb-0" role="status" aria-live="polite" aria-atomic="true"></p>
+            <div id="contenedor-productos" class="row g-4 mt-3" aria-live="polite"></div>
+        </section>
+
+        <section id="carrito" aria-labelledby="tituloCarrito">
+            <h2 id="tituloCarrito" tabindex="-1">Carrito</h2>
+            <div id="contenido-carrito" aria-live="polite">
+                <p>Tu carrito está vacío.</p>
+                <p>Cantidad total de artículos: 0</p>
+                <p>Total general: $0</p>
+            </div>
         </section>
     </main>
 
@@ -145,6 +106,6 @@
         <p>&copy; 2026 Stick Drift.</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

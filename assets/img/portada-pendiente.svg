@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" role="img" aria-labelledby="titulo">
+  <title id="titulo">Portada pendiente</title>
+  <rect width="400" height="320" fill="#e8eef4"/>
+  <rect x="120" y="60" width="160" height="130" rx="12" fill="none" stroke="#164e63" stroke-width="6"/>
+  <path d="M140 170l40-45 30 25 25-30 25 50" fill="none" stroke="#164e63" stroke-width="6"/>
+  <text x="200" y="245" text-anchor="middle" fill="#164e63" font-family="Arial, sans-serif" font-size="24">Portada pendiente</text>
+</svg>

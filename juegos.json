@@ -1,17 +1,50 @@
 [
   {
-    "titulo": "Hollow Knight",
-    "genero": "Metroidvania",
+    "id": "minecraft",
+    "nombre": "Minecraft",
+    "categoria": "Simulación",
+    "precio": 19990,
+    "imagen": "assets/img/minecraft.webp",
+    "descripcion": "Explora mundos abiertos, reúne recursos y construye todo lo que puedas imaginar."
+  },
+  {
+    "id": "zelda-breath-of-the-wild",
+    "nombre": "The Legend of Zelda: Breath of the Wild",
+    "categoria": "Aventura",
+    "precio": 49990,
+    "imagen": "assets/img/zelda-breath-of-the-wild.webp",
+    "descripcion": "Recorre el reino de Hyrule y descubre sus secretos en una aventura de mundo abierto."
+  },
+  {
+    "id": "god-of-war-ragnarok",
+    "nombre": "God of War Ragnarök",
+    "categoria": "Acción",
+    "precio": 59990,
+    "imagen": "assets/img/god-of-war-ragnarok.jpg",
+    "descripcion": "Acompaña a Kratos y Atreus en un viaje épico inspirado en la mitología nórdica."
+  },
+  {
+    "id": "hollow-knight",
+    "nombre": "Hollow Knight",
+    "categoria": "Aventura",
+    "precio": 14990,
+    "imagen": "assets/img/hollow-knight.webp",
     "descripcion": "Explora un reino subterráneo lleno de criaturas, secretos y desafiantes combates."
   },
   {
-    "titulo": "Stardew Valley",
-    "genero": "Simulación",
+    "id": "stardew-valley",
+    "nombre": "Stardew Valley",
+    "categoria": "Simulación",
+    "precio": 12990,
+    "imagen": "assets/img/stardew-valley.webp",
     "descripcion": "Cultiva tu granja, conoce a la comunidad y construye una nueva vida a tu propio ritmo."
   },
   {
-    "titulo": "Hades",
-    "genero": "Roguelike de acción",
+    "id": "hades",
+    "nombre": "Hades",
+    "categoria": "Acción",
+    "precio": 19990,
+    "imagen": "assets/img/hades.webp",
     "descripcion": "Combate para escapar del inframundo mientras descubres una historia inspirada en la mitología griega."
   }
 ]

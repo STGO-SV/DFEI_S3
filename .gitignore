@@ -9,3 +9,9 @@ desktop.ini
 *.tmp
 *.log
 .idea/
+
+# Dependencias de Node
+node_modules/
+
+# Build de Vite
+dist/

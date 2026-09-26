@@ -1,6 +1,8 @@
+import { useState } from "react"
 import { formatoPrecio } from '../utils/formatoPrecio.js'
 
 function TarjetaProducto({ producto }) {
+    const [descripcionExpandida, setDescripcionExpandida] = useState(false)
     const rutaImagen = `${import.meta.env.BASE_URL}${producto.imagen}`
 
     return (
@@ -28,14 +30,23 @@ function TarjetaProducto({ producto }) {
                         </strong>
                     </p>
 
-                    <p className="card-text">{producto.descripcion}</p>
+                    {descripcionExpandida && (
+                        <p className="card-text">{producto.descripcion}</p>
+                    )}
 
                     <button
                         type="button"
-                        className="btn btn-info btn-agregar-carrito mt-auto"
+                        className="btn btn-outline-secondary mb-3"
+                        aria-expanded={descripcionExpandida}
+                        onClick={() => setDescripcionExpandida(!descripcionExpandida)}
                     >
+                        {descripcionExpandida ? 'Ocultar descripción' : 'Ver descripción'}
+                    </button>
+
+                    <button>
                         Agregar al carrito
                     </button>
+
                 </div>
             </div>
         </article>

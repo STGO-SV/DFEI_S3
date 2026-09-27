@@ -1,7 +1,47 @@
+import { useState } from 'react'
 import CatalogoProductos from './components/CatalogoProductos.jsx'
+import Carrito from './components/Carrito.jsx'
 
 function App() {
+    const [carrito, setCarrito] = useState([])
     const baseUrl = import.meta.env.BASE_URL
+
+    function agregarAlCarrito(producto) {
+        setCarrito((carritoActual) => {
+            const productoExistente = carritoActual.find(
+                (item) => item.id === producto.id,
+            )
+
+            if (productoExistente) {
+                return carritoActual.map((item) =>
+                item.id === producto.id
+                    ? { ...item, cantidad: item.cantidad + 1}
+                    : item,
+                )
+            }
+            return [...carritoActual, { id: producto.id, cantidad: 1}]
+        })
+    }
+
+    function quitarDelCarrito(idProducto) {
+        setCarrito((carritoActual) => {
+            const productoExistente = carritoActual.find(
+                (item) => item.id === idProducto,
+            )
+
+            if (productoExistente.cantidad > 1) {
+                return carritoActual.map((item) =>
+                    item.id === idProducto
+                        ? { ...item, cantidad: item.cantidad - 1 }
+                        : item,
+                )
+            }
+
+            return carritoActual.filter(
+                (item) => item.id!== idProducto,
+            )
+        })
+    }
 
     return (
         <>
@@ -169,18 +209,15 @@ function App() {
                     </div>
                 </section>
 
-                <CatalogoProductos />
+                <section>
 
-                <section id="carrito" aria-labelledby="tituloCarrito">
-                    <h2 id="tituloCarrito" tabIndex="-1">
-                        Carrito
-                    </h2>
+                <CatalogoProductos onAgregarAlCarrito={agregarAlCarrito} />
 
-                    <div id="contenido-carrito" aria-live="polite">
-                        <p>Tu carrito está vacío.</p>
-                        <p>Cantidad total de artículos: 0</p>
-                        <p>Total general: $0</p>
-                    </div>
+                <Carrito
+                    carrito={carrito}
+                    onQuitarDelCarrito={quitarDelCarrito}
+                />
+
                 </section>
             </main>
 

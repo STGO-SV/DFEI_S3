@@ -236,6 +236,15 @@ footer p {
     overflow-wrap: anywhere;
 }
 
+.btn-agregar-carrito {
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.btn-agregar-carrito:hover {
+    filter: brightness(0.9);
+    transform: translateY(-1px);
+}
+
 .btn-agregar-carrito:focus-visible,
 .btn-eliminar-carrito:focus-visible {
     outline: 3px solid #164e63;

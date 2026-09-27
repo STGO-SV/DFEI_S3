@@ -9,7 +9,7 @@ function normalizarTexto(texto) {
         .toLowerCase()
 }
 
-function CatalogoProductos() {
+function CatalogoProductos({ onAgregarAlCarrito }) {
     const [busqueda, setBusqueda] = useState('')
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas')
 
@@ -109,8 +109,9 @@ function CatalogoProductos() {
                 >
                     {productosFiltrados.map((producto) => (
                         <TarjetaProducto
-                            producto={producto}key={producto.id}
+                            key={producto.id}
                             producto={producto}
+                            onAgregarAlCarrito={onAgregarAlCarrito}
                         />
                     ))}
                 </div>

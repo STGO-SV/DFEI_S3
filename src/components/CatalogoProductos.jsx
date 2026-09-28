@@ -71,7 +71,7 @@ function CatalogoProductos({ onAgregarAlCarrito }) {
                     Buscar productos
                 </label>
 
-                <div className="d-flex flex-column flex-sm.row gap-2">
+                <div className="d-flex flex-column flex-sm-row gap-2">
                     <input
                         type="text"
                         className="form-control"

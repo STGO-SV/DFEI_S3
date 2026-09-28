@@ -1,5 +1,5 @@
 import juegos from '../data/juegos.json'
-import ItemCarrito from './itemCarrito.jsx'
+import ItemCarrito from './ItemCarrito.jsx'
 import { formatoPrecio } from '../utils/formatoPrecio.js'
 
 function Carrito({ carrito, onQuitarDelCarrito }) {
@@ -16,6 +16,7 @@ function Carrito({ carrito, onQuitarDelCarrito }) {
     }, 0)
     return (
         <section id="carrito" aria-labelledby="tituloCarrito">
+            <h2 id="tituloCarrito">Carrito</h2>
 
             {carrito.length === 0 ? (
                 <p>Tu carrito está vacío.</p>

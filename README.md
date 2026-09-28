@@ -1,63 +1,98 @@
-# Stick Drift — Semana 6
+# Stick Drift — Semana 7
 
-Actividad sumativa de Desarrollo Frontend I (PFY2201): optimización de lógica y rendimiento con JavaScript.
+eCommerce académico desarrollado para la asignatura Desarrollo Frontend I (PFY2201). En la Semana 7, la implementación anterior fue migrada a React con Vite, manteniendo el diseño responsivo y las funcionalidades del catálogo y del carrito de compras.
 
-## Ejecutar localmente
+## Objetivo
 
-Desde la raíz del proyecto, con Python instalado:
+Aplicar componentes funcionales, props, Hooks, eventos y renderizado condicional en una aplicación React modular. Los datos de los productos se mantienen en un archivo JSON local y el proyecto se prepara para compilación y publicación en GitHub Pages.
 
-```powershell
-python -m http.server 8000 --bind 127.0.0.1
-```
+## Tecnologías utilizadas
 
-Abrir http://localhost:8000/. Usar HTTP, no abrir el HTML mediante `file://`, para permitir Fetch. Si el puerto está ocupado, utilizar otro puerto disponible. Ante contenido antiguo, realizar una recarga forzada del navegador.
+- React 19 y React DOM.
+- Vite 8.
+- JavaScript y JSX.
+- ESLint.
+- Bootstrap 5.3.8 mediante CDN.
+- CSS personalizado.
+- `gh-pages` para el despliegue.
 
-## Estructura del entregable
+## Estructura general
 
 ```text
-index.html
-juegos.json
-assets/
-├── css/estilos.css
-├── js/script.js
-└── img/
-    ├── minecraft.webp
-    ├── zelda-breath-of-the-wild.webp
-    ├── god-of-war-ragnarok.jpg
-    ├── portada-pendiente.svg
-    └── favicon.png
-capturas/  (evidencias históricas)
+├── public/assets/img/       # Imágenes locales del catálogo
+├── src/
+│   ├── components/          # Componentes React reutilizables
+│   ├── data/juegos.json     # Fuente de datos de los productos
+│   ├── styles/estilos.css   # Estilos generales y responsivos
+│   ├── utils/               # Utilidades compartidas
+│   ├── App.jsx              # Estructura principal y estado del carrito
+│   └── main.jsx             # Punto de entrada de React
+├── capturas/                # Evidencias visuales del proyecto
+├── index.html               # Documento base de Vite
+├── eslint.config.js
+├── vite.config.js
+└── package.json
 ```
 
-## Funcionamiento
+## Componentes principales
 
-- El catálogo de seis productos proviene exclusivamente de `juegos.json` mediante Fetch.
-- Categorías generadas desde los datos: Simulación, Aventura y Acción, además de Todos.
-- La búsqueda mediante submit combina categoría con nombre, descripción o categoría; ignora mayúsculas, tildes y espacios exteriores.
-- Para mostrar todo: seleccionar Todos, vaciar la búsqueda y enviarla.
-- El carrito acumula cantidades, calcula subtotales y total en CLP y elimina líneas completas. Los filtros no borran el carrito.
-- El estado existe solo en memoria y se reinicia al recargar. No hay pagos, backend ni persistencia.
+- `App`: compone la aplicación y administra el estado compartido del carrito.
+- `CatalogoProductos`: genera las categorías, controla la búsqueda y filtra el catálogo.
+- `TarjetaProducto`: presenta la información y las acciones de cada videojuego.
+- `Carrito`: calcula y muestra los artículos, sus cantidades y el total general.
+- `ItemCarrito`: representa una línea del carrito y permite quitar una unidad o eliminarla.
 
-## Auditoría técnica final
+## Funcionalidades
 
-- Sintaxis JavaScript y espacios del diff verificados.
-- Revisados seis productos, categorías, búsqueda, combinación de filtros, carrito, cálculos, eliminación y teclado.
-- Revisados anchos de 390, 768 y 1440 px, sin desbordamiento horizontal.
-- Prueba HTTP real: se renombró temporalmente el JSON, se comprobó el aviso de error y se restauró inmediatamente; el catálogo volvió a cargar.
-- Pruebas aisladas del código para JSON ilegible, estructura inválida, catálogo vacío, fallo de red e IDs inexistentes.
-- Mensajes de error comprensibles en la página; `console.error` se reserva para diagnóstico técnico.
-- Rutas locales verificadas mediante HTTP; botones con type, imágenes con alt y labels asociados.
+- Catálogo de seis videojuegos obtenido desde `src/data/juegos.json`.
+- Nombre, categoría, imagen, precio normal, precio de oferta y descripción por producto.
+- Búsqueda por nombre, descripción o categoría, sin distinguir mayúsculas ni tildes.
+- Filtro por categorías generado a partir de los datos.
+- Descripciones que se pueden mostrar u ocultar.
+- Carrito con incorporación de productos y acumulación de cantidades.
+- Reducción de una unidad o eliminación del producto cuando queda la última unidad.
+- Cálculo de subtotales, cantidad total de artículos y total general en pesos chilenos.
+- Mensajes condicionales para búsquedas sin resultados y carrito vacío.
+- Diseño adaptable apoyado en Bootstrap y estilos propios.
 
-## Imágenes y precios
+El estado se conserva solamente durante la sesión actual del navegador. El proyecto no incluye pagos, backend ni persistencia.
 
-Los precios son simulados para la actividad. Hollow Knight, Stardew Valley y Hades utilizan el recurso local `portada-pendiente.svg`, con texto alternativo que identifica la portada pendiente. Es una presentación temporal intencional, sin enlaces rotos; quedan pendientes las portadas reales.
+## Instalación y ejecución local
 
-El favicon se redujo localmente de 1.289.120 a 9.639 bytes, manteniendo el diseño y la proporción original en un PNG de 96 × 64 píxeles.
+Se requiere Node.js y npm. Desde la raíz del repositorio:
 
-## Preparación de publicación
+```powershell
+npm install
+npm run dev
+```
 
-El sitio es estático, no requiere compilación y utiliza rutas relativas. Conservar `index.html`, `juegos.json` y `assets/` juntos, respetando nombres y mayúsculas. Bootstrap 5.3.8 se carga desde un CDN y requiere conexión.
+Vite mostrará en la terminal la dirección local de desarrollo.
 
-La versión auditada permanece en la rama `semana-6`, con cambios locales sin preparar. La publicación de esta versión y su verificación en GitHub Pages están pendientes de autorización. No se ha modificado `main`, `semana-5` ni `gh-pages`, ni se ha realizado commit, push o merge.
+### Comandos disponibles
 
-Antes de entregar la URL definitiva: revisar los cambios acumulados, completar la publicación autorizada y volver a comprobar las rutas, Fetch y la consola en la URL publicada. Las capturas existentes corresponden a fases anteriores y no sustituyen evidencias de esta versión final.
+```powershell
+npm run dev      # Inicia el servidor de desarrollo
+npm run lint     # Revisa el código con ESLint
+npm run build    # Genera el build de producción en dist/
+npm run preview  # Prueba localmente el build de producción
+npm run deploy   # Compila y publica dist/ mediante gh-pages
+```
+
+## Repositorio y despliegue
+
+- Repositorio: [github.com/STGO-SV/DFEI_S3](https://github.com/STGO-SV/DFEI_S3)
+- Aplicación publicada: [stgo-sv.github.io/DFEI_S3](https://stgo-sv.github.io/DFEI_S3/)
+
+Vite utiliza la base `/DFEI_S3/` para resolver correctamente scripts, estilos e imágenes en GitHub Pages. Bootstrap se carga desde un CDN y requiere conexión a Internet.
+
+## Evidencias
+
+Las capturas de la carpeta `capturas/` documentan las funcionalidades implementadas en la Semana 7:
+
+- [`1_vista_catalogo_escritorio.png`](capturas/1_vista_catalogo_escritorio.png): muestra la vista general del catálogo en escritorio, con las tarjetas de productos, imágenes, categorías y precios normal y de oferta.
+- [`2_busqueda_filtro_descripcion_expandida.png`](capturas/2_busqueda_filtro_descripcion_expandida.png): evidencia la búsqueda de productos, el filtro por categoría y la visualización condicional de una descripción expandida.
+- [`3_carrito_multiples_productos_y_unidades.png`](capturas/3_carrito_multiples_productos_y_unidades.png): muestra el carrito con distintos productos y varias unidades, junto con subtotales, cantidad total de artículos y total monetario.
+- [`4_carrito_eliminacion.png`](capturas/4_carrito_eliminacion.png): evidencia el resultado de quitar unidades y eliminar productos del carrito, con la actualización de cantidades y totales.
+- [`5_vista_movil.png`](capturas/5_vista_movil.png): muestra la adaptación responsiva de la interfaz y del catálogo en una pantalla móvil.
+
+Los precios son simulados y las imágenes se almacenan localmente con fines académicos.

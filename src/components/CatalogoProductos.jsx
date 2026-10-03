@@ -8,7 +8,7 @@ function normalizarTexto(texto) {
         .toLowerCase()
 }
 
-function CatalogoProductos({ productos, cargando, error, onAgregarAlCarrito }) {
+function CatalogoProductos({ productos, carrito, cargando, error, onAgregarAlCarrito }) {
     const [busqueda, setBusqueda] = useState('')
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas')
 
@@ -110,13 +110,20 @@ function CatalogoProductos({ productos, cargando, error, onAgregarAlCarrito }) {
                     className="row g-4 mt-3"
                     aria-live="polite"
                 >
-                    {productosFiltrados.map((producto) => (
-                        <TarjetaProducto
-                            key={producto.id}
-                            producto={producto}
-                            onAgregarAlCarrito={onAgregarAlCarrito}
-                        />
-                    ))}
+                    {productosFiltrados.map((producto) => {
+                        const itemCarrito = carrito.find(
+                            (item) => item.id === producto.id,
+                        )
+
+                        return (
+                            <TarjetaProducto
+                                key={producto.id}
+                                producto={producto}
+                                cantidadEnCarrito={itemCarrito?.cantidad ?? 0}
+                                onAgregarAlCarrito={onAgregarAlCarrito}
+                            />
+                        )
+                    })}
                 </div>
             ) : (
                 <p className="mt-4" role="status">

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { formatoPrecio } from '../utils/formatoPrecio.js'
 
-function TarjetaProducto({ producto, onAgregarAlCarrito }) {
+function TarjetaProducto({ producto, cantidadEnCarrito, onAgregarAlCarrito }) {
     const [descripcionExpandida, setDescripcionExpandida] = useState(false)
     const rutaImagen = `${import.meta.env.BASE_URL}${producto.imagen}`
 
@@ -44,12 +44,20 @@ function TarjetaProducto({ producto, onAgregarAlCarrito }) {
                             {descripcionExpandida ? 'Ocultar descripción' : 'Ver descripción'}
                         </button>
 
+                        {cantidadEnCarrito > 0 && (
+                            <p className="mb-2">
+                                <strong>En el carrito:</strong> {cantidadEnCarrito}
+                            </p>
+                        )}
+
                         <button
                             type="button"
                             className="btn btn-info btn-agregar-carrito w-100"
                             onClick={() => onAgregarAlCarrito(producto)}
                         >
-                            Agregar al carrito
+                            {cantidadEnCarrito > 0
+                                ? `Agregar otra unidad`
+                                : `Agregar al carrito`}
                         </button>
                     </div>
 

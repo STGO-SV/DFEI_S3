@@ -285,6 +285,7 @@ function App() {
 
                 <CatalogoProductos
                     productos={productos}
+                    carrito={carrito}
                     cargando={cargando}
                     error={error}
                     onAgregarAlCarrito={agregarAlCarrito}

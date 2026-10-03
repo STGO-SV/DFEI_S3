@@ -1,12 +1,83 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CatalogoProductos from './components/CatalogoProductos.jsx'
 import Carrito from './components/Carrito.jsx'
 
+const claveCarrito = 'stick-drift-carrito'
+
+function recuperarCarrito() {
+    // El almacenamiento puede estar bloqueado o contener datos de una sesión inválida.
+    try {
+        const datos = JSON.parse(localStorage.getItem(claveCarrito) || '[]')
+        const ids = new Set()
+        if (!Array.isArray(datos) || datos.some((item) => {
+            if (!item || typeof item.id !== 'string' || !item.id.trim() ||
+                !Number.isSafeInteger(item.cantidad) || item.cantidad < 1 || ids.has(item.id)) {
+                return true
+            }
+            ids.add(item.id)
+            return false
+        })) return []
+        return datos.map(({ id, cantidad }) => ({ id, cantidad }))
+    } catch {
+        return []
+    }
+}
+
 function App() {
-    const [carrito, setCarrito] = useState([])
+    const [carrito, setCarrito] = useState(recuperarCarrito)
+    const [productos, setProductos] = useState([])
+    const [cargando, setCargando] = useState(true)
+    const [error, setError] = useState('')
     const baseUrl = import.meta.env.BASE_URL
 
+    useEffect(() => {
+        // Una única carga compartida; se cancela al desmontar, también en StrictMode.
+        const controlador = new AbortController()
+        async function cargarProductos() {
+            try {
+                const respuesta = await fetch(`${baseUrl}juegos.json`, {
+                    signal: controlador.signal,
+                })
+                if (!respuesta.ok) throw new Error(`Error HTTP: ${respuesta.status}`)
+                const datos = await respuesta.json()
+                const ids = new Set()
+                if (!Array.isArray(datos) || datos.some((producto) => {
+                    if (!producto || ['id', 'nombre', 'categoria', 'descripcion', 'imagen']
+                        .some((campo) => typeof producto[campo] !== 'string' || !producto[campo].trim()) ||
+                        !Number.isFinite(producto.precioNormal) || producto.precioNormal < 0 ||
+                        !Number.isFinite(producto.precioOferta) || producto.precioOferta < 0 ||
+                        ids.has(producto.id)) return true
+                    ids.add(producto.id)
+                    return false
+                })) throw new Error('Catálogo inválido')
+                if (controlador.signal.aborted) return
+                setProductos(datos)
+                // Descarta referencias guardadas a productos que ya no están disponibles.
+                setCarrito((actual) => actual.filter((item) => ids.has(item.id)))
+                setError('')
+            } catch (fallo) {
+                if (controlador.signal.aborted) return
+                console.error('Error al cargar el catálogo:', fallo)
+                setError('No pudimos cargar el catálogo. Recarga la página para intentarlo nuevamente.')
+            } finally {
+                if (!controlador.signal.aborted) setCargando(false)
+            }
+        }
+        cargarProductos()
+        return () => controlador.abort()
+    }, [baseUrl])
+
+    useEffect(() => {
+        // Persiste solo IDs y cantidades; los precios siempre provienen del catálogo actual.
+        try {
+            localStorage.setItem(claveCarrito, JSON.stringify(carrito))
+        } catch {
+            console.warn('No se pudo guardar el carrito en este navegador.')
+        }
+    }, [carrito])
+
     function agregarAlCarrito(producto) {
+        if (!producto || !productos.some((item) => item.id === producto.id)) return
         setCarrito((carritoActual) => {
             const productoExistente = carritoActual.find(
                 (item) => item.id === producto.id,
@@ -29,6 +100,9 @@ function App() {
                 (item) => item.id === idProducto,
             )
 
+            // Un ID inexistente no debe provocar una excepción ni cambiar el carrito.
+            if (!productoExistente) return carritoActual
+
             if (productoExistente.cantidad > 1) {
                 return carritoActual.map((item) =>
                     item.id === idProducto
@@ -38,7 +112,7 @@ function App() {
             }
 
             return carritoActual.filter(
-                (item) => item.id!== idProducto,
+                (item) => item.id !== idProducto,
             )
         })
     }
@@ -209,16 +283,21 @@ function App() {
                     </div>
                 </section>
 
-                <section>
-
-                <CatalogoProductos onAgregarAlCarrito={agregarAlCarrito} />
+                <CatalogoProductos
+                    productos={productos}
+                    cargando={cargando}
+                    error={error}
+                    onAgregarAlCarrito={agregarAlCarrito}
+                />
 
                 <Carrito
                     carrito={carrito}
+                    productos={productos}
+                    cargando={cargando}
+                    error={error}
                     onQuitarDelCarrito={quitarDelCarrito}
                 />
 
-                </section>
             </main>
 
             <footer id="contacto">

@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import juegos from '../data/juegos.json'
+import { useState } from 'react'
 import TarjetaProducto from './TarjetaProducto.jsx'
 
 function normalizarTexto(texto) {
@@ -9,16 +8,16 @@ function normalizarTexto(texto) {
         .toLowerCase()
 }
 
-function CatalogoProductos({ onAgregarAlCarrito }) {
+function CatalogoProductos({ productos, cargando, error, onAgregarAlCarrito }) {
     const [busqueda, setBusqueda] = useState('')
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas')
 
     const categorias = [
         'Todas',
-        ...new Set(juegos.map((producto) => producto.categoria)),
+        ...new Set(productos.map((producto) => producto.categoria)),
     ]
 
-    const productosFiltrados = juegos.filter((producto) => {
+    const productosFiltrados = productos.filter((producto) => {
         const coincideCategoria =
             categoriaSeleccionada === 'Todas' ||
             producto.categoria === categoriaSeleccionada
@@ -54,7 +53,7 @@ function CatalogoProductos({ onAgregarAlCarrito }) {
                         type="button"
                         className="btn btn-outline-info btn-categoria"
                         aria-pressed={categoriaSeleccionada === categoria}
-                        onClick={ () => setCategoriaSeleccionada(categoria)}
+                        onClick={() => setCategoriaSeleccionada(categoria)}
                     >
                         {categoria}
                     </button>
@@ -101,7 +100,11 @@ function CatalogoProductos({ onAgregarAlCarrito }) {
                 </p>
             </form>
 
-            {productosFiltrados.length> 0 ? (
+            {cargando ? (
+                <p className="mt-4" role="status">Cargando productos...</p>
+            ) : error ? (
+                <p className="alert alert-danger mt-4" role="alert">{error}</p>
+            ) : productosFiltrados.length > 0 ? (
                 <div
                     id="contenedor-productos"
                     className="row g-4 mt-3"

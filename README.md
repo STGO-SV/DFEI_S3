@@ -28,7 +28,7 @@ Mejorar las funcionalidades del eCommerce mediante `useState`, `useEffect` y ren
 │   ├── utils/formatoPrecio.js # Formato monetario en CLP
 │   ├── App.jsx              # Carga del catálogo y estado/persistencia del carrito
 │   └── main.jsx             # Punto de entrada de React
-├── capturas/                # Evidencias visuales del proyecto
+├── docs/evidencia/          # Evidencias finales de Semana 8 (PNG y MP4)
 ├── index.html               # Documento base de Vite
 ├── eslint.config.js
 ├── vite.config.js
@@ -102,14 +102,19 @@ Se comprobaron `npm run lint`, `npm run build`, la carga dinámica del catálogo
 
 ## Evidencias
 
-Las capturas existentes en `capturas/` corresponden a Semana 7 y se conservan como antecedente:
+Las evidencias finales de Semana 8 se encuentran en `docs/evidencia/`.
 
-- [`1_vista_catalogo_escritorio.png`](capturas/1_vista_catalogo_escritorio.png): muestra la vista general del catálogo en escritorio, con las tarjetas de productos, imágenes, categorías y precios normal y de oferta.
-- [`2_busqueda_filtro_descripcion_expandida.png`](capturas/2_busqueda_filtro_descripcion_expandida.png): evidencia la búsqueda de productos, el filtro por categoría y la visualización condicional de una descripción expandida.
-- [`3_carrito_multiples_productos_y_unidades.png`](capturas/3_carrito_multiples_productos_y_unidades.png): muestra el carrito con distintos productos y varias unidades, junto con subtotales, cantidad total de artículos y total monetario.
-- [`4_carrito_eliminacion.png`](capturas/4_carrito_eliminacion.png): evidencia el resultado de quitar unidades y eliminar productos del carrito, con la actualización de cantidades y totales.
-- [`5_vista_movil.png`](capturas/5_vista_movil.png): muestra la adaptación responsiva de la interfaz y del catálogo en una pantalla móvil.
+### Evidencias de los requisitos de la actividad
 
-Las evidencias de Semana 8 están pendientes de generar. Deben mostrar la petición del JSON local y el catálogo cargado, el carrito antes y después de recargar, los estados condicionales (carga, error, sin resultados, carrito vacío y acciones según cantidad) y la vista responsive del carrito en escritorio y móvil.
+Las capturas 01-a y 01-b forman un par de evidencias técnicas complementarias de la carga dinámica mediante `fetch`:
+
+- [`01-a-catalogo-carga-dinamica.png`](docs/evidencia/01-a-catalogo-carga-dinamica.png): muestra en DevTools/Network la solicitud GET a `https://stgo-sv.github.io/DFEI_S3/juegos.json` y el estado `200 OK` (desde la caché de disco), confirmando la ruta del JSON local en GitHub Pages.
+- [`01-b-catalogo-carga-dinamica.png`](docs/evidencia/01-b-catalogo-carga-dinamica.png): muestra el iniciador y la cadena de la misma solicitud, vinculándola con el bundle JavaScript de la aplicación. Complementa la evidencia de URL, método y respuesta de 01-a. La implementación de `fetch` y la actualización del estado con `useEffect` se pueden revisar en `App.jsx`: los datos proceden de `public/juegos.json`, sin API externa ni backend.
+- [`02-persistencia-carrito.mp4`](docs/evidencia/02-persistencia-carrito.mp4): muestra el carrito antes y después de recargar la aplicación, conservando sus productos y cantidades mediante `localStorage`. El video documenta el proceso temporal de persistencia.
+- [`03-renderizado-condicional.png`](docs/evidencia/03-renderizado-condicional.png): muestra una descripción expandida con el botón “Ocultar descripción” y un producto agregado con “En el carrito: 1” y “Agregar otra unidad”. También muestra el carrito con miniatura, subtotal, cantidad total y total monetario.
+
+### Evidencia complementaria
+
+- [`04-responsive-interaccion.mp4`](docs/evidencia/04-responsive-interaccion.mp4): evidencia complementaria del cambio de layout entre distintos anchos de viewport y del comportamiento interactivo visual de la aplicación.
 
 Los precios son simulados y las imágenes se almacenan localmente con fines académicos.
